@@ -26,10 +26,10 @@ class _homePageState extends State<homePage> {
     ),
       ShopPage(
         goToRequisitionTab: () => navigateBottomBar(0),
-        goToCartTab: () => navigateBottomBar(1) ,
+        onContinue: () => navigateBottomBar(2),
       ),
-      CartPage(
-        goToShopTab: () => navigateBottomBar(2),
+      ProvisionPage(
+        goToShopTab: () => navigateBottomBar(1),
       ),
     ];
   }

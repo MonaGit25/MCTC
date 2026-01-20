@@ -30,6 +30,7 @@ class RequisitionPage extends StatelessWidget {
       backgroundColor: const Color(0xF3F2F6FF),
 
       appBar: AppBar(
+        title: const Text("Requisitions"),
         backgroundColor: const Color(0xF3F2F6FF),
         leading: Builder(builder: (context) => IconButton(
           icon: const Icon(Icons.menu),
