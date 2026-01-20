@@ -1,12 +1,15 @@
 import 'package:ecommerce_app/utilities/input_decorations.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/pages/cart_page.dart';
 
 class ShopPage extends StatefulWidget {
   final VoidCallback goToRequisitionTab;
+  final VoidCallback goToCartTab;
 
   const ShopPage({
     super.key,
     required this.goToRequisitionTab,
+    required this.goToCartTab,
   });
 
   @override
@@ -222,6 +225,7 @@ class _ShopPageState extends State<ShopPage> {
             ),
           ),
         ),
+        const SizedBox(height: 10),
         const Text(
           "Requisition Type",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
@@ -231,6 +235,28 @@ class _ShopPageState extends State<ShopPage> {
           maxLines: 4,
           decoration: appInputDecoration("Enter description"),
         ),
+        const SizedBox(height: 32),
+        Center(
+          child: GestureDetector(
+            // onTap: goToCartTab,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFFDE7311),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              padding: const EdgeInsets.only(
+                left: 175.0,
+                top: 10.0,
+                right: 175.0,
+                bottom: 10.0,
+              ),
+              child: const Text(
+                "Continue",
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
