@@ -22,7 +22,7 @@ class _homePageState extends State<homePage> {
 
     _pages = [
     RequisitionPage(
-      goToShopTab: () => navigateBottomBar(0),
+      goToShopTab: () => navigateBottomBar(1),
     ),
       ShopPage(
         goToRequisitionTab: () => navigateBottomBar(0),
