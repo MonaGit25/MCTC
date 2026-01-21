@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/utilities/input_decorations.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/pages/cart_page.dart';
 
 class ShopPage extends StatefulWidget {
   final VoidCallback onContinue;
