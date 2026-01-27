@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/components/item_catalog.dart';
 import 'package:ecommerce_app/components/item_list.dart';
 import 'package:flutter/material.dart';
+
 
 class ProvisionPage extends StatefulWidget {
   final VoidCallback goToShopTab;
@@ -12,7 +14,12 @@ class ProvisionPage extends StatefulWidget {
   @override
   State<ProvisionPage> createState() => _ProvisionPageState();
 }
+class Category {
+  final String title;
+  final String image;
 
+  Category({required this.title, required this.image});
+}
 // Search bar
 class CustomSearchDelegate extends SearchDelegate {
   final List<String> data = [
@@ -62,6 +69,18 @@ class CustomSearchDelegate extends SearchDelegate {
 }
 
 class _ProvisionPageState extends State<ProvisionPage> {
+  final List<String> _things =
+  List.generate(4, (index) => 'Type ${index + 1}');
+
+  final List<Category> _types = [
+    Category(title: 'Bakery', image: 'lib/images/bakery.png'),
+    Category(title: 'Meat', image: 'lib/images/beef.png'),
+    Category(title: 'Perishables', image: 'lib/images/bun.png'),
+  ];
+
+  // final List<String> _types =
+  // List.generate(4, (index) => 'Type ${index + 1}');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,53 +93,66 @@ class _ProvisionPageState extends State<ProvisionPage> {
             onPressed: widget.goToShopTab,
           ),
         ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Provision Store",
-              style: TextStyle(fontSize: 26, color: Color(0xFFD97A1D),fontWeight: FontWeight.w600),
-            ),
-            const Text(
-              "Browse and add items for delivery",
-              style: TextStyle(fontSize: 15, color: Color(0xFF939393), fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(height: 32),SizedBox( height: 50,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Color(0x80DDDDDD),
-                  ),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon: const Icon(Icons.search,
-                      color: Color(0xFF939393),
+            const Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Provision Store",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFD97A1D),
                     ),
-                    padding: EdgeInsets.zero, // 🔥 important
-                    constraints: const BoxConstraints(), // 🔥 removes extra space
-                    onPressed: () {
-                      showSearch(
-                        context: context,
-                        delegate: CustomSearchDelegate(),
-                      );
-                    },
+                  ),
+                  SizedBox(height: 4),
+                  Text("Browse and add items for delivery"),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Search items",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
             ),
-            ListView(
-              children: [
-                ItemsList(),
-              ],
+
+            SizedBox(
+              height: 70, // slightly bigger than item height
+              child: ListView.builder(
+                primary: false,
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: _types.length,
+                itemBuilder: (context, index) {
+                  return ItemTypes(
+                    title: _types[index].title,
+                    image: _types[index].image,
+                  );
+                },
+              ),
+            ),
+
+            const SizedBox(height: 12),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: _things.length,
+                itemBuilder: (context, index) {
+                  return ItemsList(items: _things[index]);
+                },
+              ),
             ),
           ],
         ),
